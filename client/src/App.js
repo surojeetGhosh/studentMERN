@@ -1,20 +1,15 @@
+import React from "react";
+import NavBar from "./components/NavBar";
+import Carousel from "./components/Carousel";
+import Footer from "./components/Footer"
 import "./App.css";
-
 function App() {
   return (
     <div>
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-          <img
-            src="/docs/4.0/assets/brand/bootstrap-solid.svg"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt=""
-          />
-          Bootstrap
-        </a>
-      </nav>
+      <NavBar />
+      <hr className="seperator rounded"/>
+      {/* <Carousel /> */}
+      <Footer />
     </div>
   );
 }
