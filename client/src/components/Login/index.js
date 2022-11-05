@@ -1,7 +1,23 @@
 import React from "react";
 import axios from "axios";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .request({
+        method: "POST",
+        url: "/auth/isAuth",
+      })
+      .then((res) => {
+        if (res.data.auth) {
+          return navigate("/dashboard");
+        }
+      });
+  }, []);
   const [formData, changeData] = React.useState({
     roll: "",
     password: "",
@@ -57,6 +73,7 @@ export default function Login() {
               error: true,
               msg: "Login Success",
             });
+            return navigate("/dashboard");
           } else {
             setError({
               error: true,

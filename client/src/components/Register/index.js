@@ -66,6 +66,7 @@ export default function Register() {
           },
         })
         .then((res) => {
+          console.log(res.data);
           if (res.data.keyValue) {
             setError({
               error: true,
@@ -76,6 +77,14 @@ export default function Register() {
               error: true,
               msg: "Registered",
             });
+            changeData({
+              roll: "",
+              firstName: "",
+              lastName: "",
+              password: "",
+              repassword: "",
+              contact: "",
+            })
           }
         });
     }
