@@ -44,34 +44,35 @@ const Student = model("student", studentSchema);
 
 
 // for checking purpose whether api working or not
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Api working");
 })
 
 
 // URL for registering user
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   const data = req.body;
+  console.log(data);
   const studentData = new Student({
-    roll : Number(req.body.roll),
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    password: req.body.password,
-    contact: Number(req.body.contact)
+    roll : Number(data.roll),
+    firstName: data.firstName,
+    lastName: data.lastName,
+    password: data.password,
+    contact: Number(data.contact)
   })
 
   studentData.save((doc, err) => {
     if(err) {
       return res.json(err);
     } else {
-      return res.json({registered: true});
+      return res.json(doc);
     }
   })
 })
 
 
 //URL  this is used for login purposes
-app.get("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const data = req.body;
   Student.findOne({roll: Number(data.roll), password: data.password}, (docs, err) => {
     if(err) {
@@ -89,7 +90,7 @@ app.get("/login", (req, res) => {
 
 // URL this is used for deleting Account purposes
 
-app.post("/delete", (req, res) => {
+app.post("/api/delete", (req, res) => {
   const data = req.body;
   Student.findOneAndDelete({roll: Number(data.roll)}, (result, err) => {
     if (err) {
@@ -102,7 +103,7 @@ app.post("/delete", (req, res) => {
 
 // URL this is used for updating contacts in User
 
-app.post("/update", (req, res) => {
+app.post("/api/update", (req, res) => {
   const data = req.body;
   Student.findOneAndUpdate({roll: Number(data.roll)}, data, (result, err) => {
     if(err) {
