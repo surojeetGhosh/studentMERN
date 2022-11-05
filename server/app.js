@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -21,7 +22,7 @@ app.use(
 // Connecting mongodb
 mongoose
   .connect(
-    "mongodb+srv://surojeet:Suro%40123@cluster0.qhibn.mongodb.net/student?retryWrites=true&w=majority"
+    process.env.DATABASE
   )
   .then(() => {
     console.log("Database connected");
